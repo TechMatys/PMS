@@ -1,0 +1,20 @@
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.AssemblyInfoInputs.cache
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.AssemblyInfo.cs
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.csproj.CoreCompileInputs.cache
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.deps.json
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.pdb
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.pdb
+D:\Users\ddhiman\source\repos\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.csproj.AssemblyReference.cache
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.deps.json
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\bin\Debug\netcoreapp3.1\MailCampaign.Core.pdb
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.csproj.AssemblyReference.cache
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.AssemblyInfoInputs.cache
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.AssemblyInfo.cs
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.csproj.CoreCompileInputs.cache
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Core\obj\Debug\netcoreapp3.1\MailCampaign.Core.pdb
