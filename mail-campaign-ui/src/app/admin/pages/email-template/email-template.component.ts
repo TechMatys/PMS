@@ -41,6 +41,10 @@ export class EmailTemplateComponent implements OnInit {
     });
   }
 
+  showToaster(){
+    this.notifyService.showSuccess("Adding template", "Success")
+  }
+
   addTemplate(){
     this.isShown = false;   
     this.isAddNew = true;  
@@ -61,7 +65,6 @@ export class EmailTemplateComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.getTemplate();
-          // this.notifyService.showSuccess("Adding template", "Success")
         },
         error: (e) => console.error(e)
       });   
