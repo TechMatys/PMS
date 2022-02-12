@@ -20,6 +20,8 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import {ConfirmDialogComponent} from './core/confirm-dialog/confirm-dialog.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     FooterComponent,
     SideNavComponent,
-    DashboardComponent,    
+    DashboardComponent, 
+    ConfirmDialogComponent   
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CKEditorModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/core/services/https/http.service';
-import { NotificationService  } from 'src/app/core/services/notifications/notification.service';
+import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { ConfirmDialogService } from 'src/app/core/services/dialog/confirm-dialog.service';
 
 interface Template {
   templateId: any,
@@ -30,16 +31,17 @@ export class EmailTemplateComponent implements OnInit {
   faDelete = faTrash;
   faView = faEye;
 
-  isShown: boolean = false;  
+  isShown: boolean = false;
   isAddNew: boolean = true;
-  IsRecordFetching: boolean = false;  
+  IsRecordFetching: boolean = false;
   templateId: number = 0;
   controllerName = "template";
 
-  constructor(private http : HttpService, private fB : FormBuilder, private notifyService : NotificationService ) {
-  }      
+  constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
+    private confirmDialogService: ConfirmDialogService) {
+  }
 
-  getTemplate(){
+  getTemplate() {
     this.isShown = true;
     this.IsRecordFetching = true;
     this.http.getAll(this.controllerName).subscribe(res => {
@@ -48,81 +50,86 @@ export class EmailTemplateComponent implements OnInit {
     });
   }
 
-  showToaster(){
-    this.notifyService.showSuccess("Adding template", "Success")
+  showBox() {
+    //this.notifyService.showSuccess("Adding template", "Success")
+    this.confirmDialogService.confirmThis("Are you sure to delete this template?", function () {
+      alert("Yes clicked");
+    }, function () {
+      alert("No clicked");
+    })
   }
 
-  addTemplate(){
-    this.isShown = false;   
-    this.isAddNew = true;  
+  addTemplate() {
+    this.isShown = false;
+    this.isAddNew = true;
     const data = {
-      title : '',
-      description : '',
+      title: '',
+      description: '',
       htmlContent: ''
     }
     this.createTemplateForm(data);
   }
-  
-  saveTemplate(){
+
+  saveTemplate() {
     this.templateData = this.templateForm.value;
 
     const data = Object.assign({}, this.templateData);
 
-    this.http.create(this.controllerName,data)
+    this.http.create(this.controllerName, data)
       .subscribe({
         next: (res) => {
           this.getTemplate();
         },
         error: (e) => console.error(e)
-      });   
+      });
   }
 
-  createTemplateForm(data : any){
+  createTemplateForm(data: any) {
     this.templateForm = this.fB.group({
-      title : [data.title],
-      description : [data.description],
-      htmlContent : [data.htmlContent]
+      title: [data.title],
+      description: [data.description],
+      htmlContent: [data.htmlContent]
     });
   }
-  
-  editTemplate(id : any){  
+
+  editTemplate(id: any) {
     this.templateId = id;
-    this.http.get(this.controllerName,id).subscribe(res => {      
+    this.http.get(this.controllerName, id).subscribe(res => {
       this.isShown = false;
-      this.isAddNew = false;  
+      this.isAddNew = false;
       this.createTemplateForm(res);
-    });  
+    });
   }
 
-  viewTemplate(id : any){      
-    this.http.get(this.controllerName,id).subscribe(res => {      
-     
-    });  
+  viewTemplate(id: any) {
+    this.http.get(this.controllerName, id).subscribe(res => {
+
+    });
   }
 
-  updateTemplate(){
+  updateTemplate() {
     this.templateData = this.templateForm.value;
 
     const data = Object.assign({}, this.templateData);
 
-    this.http.update(this.controllerName,this.templateId, data)
+    this.http.update(this.controllerName, this.templateId, data)
       .subscribe({
         next: (res) => {
           this.getTemplate();
         },
         error: (e) => console.error(e)
-      });  
+      });
   }
 
-  deleteTemplate(id : any){
+  deleteTemplate(id: any) {
     this.http.delete(this.controllerName, id).subscribe(res => {
       this.getTemplate();
-    });   
+    });
   }
 
   ngOnInit(): void {
-    this.isShown = ! this.isShown;    
-    this.IsRecordFetching = ! this.IsRecordFetching;  
+    this.isShown = !this.isShown;
+    this.IsRecordFetching = !this.IsRecordFetching;
     this.getTemplate();
   }
 
