@@ -71,7 +71,7 @@ namespace MailCampaign.Infrastructure.Repositories
         {
             try
             {
-                var query = @"INSERT INTO Templates(Title, Description, @HtmlContent, IsActive, CreatedBy, CreatedDate) 
+                var query = @"INSERT INTO Templates(Title, Description, HtmlContent, IsActive, CreatedBy, CreatedDate) 
                               VALUES (@Title, @Description, @HtmlContent, 1, -1, GetUtcDate())";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))

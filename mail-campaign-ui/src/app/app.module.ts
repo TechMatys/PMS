@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DashboardComponent } from './admin/pages/dashboard/dashboard.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    CKEditorModule
+    CKEditorModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

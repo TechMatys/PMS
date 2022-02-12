@@ -3,6 +3,7 @@ import { HttpService } from 'src/app/core/services/https/http.service';
 import { NotificationService  } from 'src/app/core/services/notifications/notification.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 interface Template {
   templateId: any,
@@ -25,9 +26,13 @@ export class EmailTemplateComponent implements OnInit {
   templatelist: Template[] = [];
   templateData: Template[] = [];
   public Editor = ClassicEditor;
+  faEdit = faEdit;
+  faDelete = faTrash;
+  faView = faEye;
 
   isShown: boolean = false;  
   isAddNew: boolean = true;
+  IsRecordFetching: boolean = false;  
   templateId: number = 0;
   controllerName = "template";
 
@@ -36,8 +41,10 @@ export class EmailTemplateComponent implements OnInit {
 
   getTemplate(){
     this.isShown = true;
+    this.IsRecordFetching = true;
     this.http.getAll(this.controllerName).subscribe(res => {
       this.templatelist = res;
+      this.IsRecordFetching = false;
     });
   }
 
@@ -115,6 +122,7 @@ export class EmailTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.isShown = ! this.isShown;    
+    this.IsRecordFetching = ! this.IsRecordFetching;  
     this.getTemplate();
   }
 
