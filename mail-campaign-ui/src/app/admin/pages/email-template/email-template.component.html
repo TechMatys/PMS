@@ -1,15 +1,31 @@
-<div class="panel-heading">
-  <div class="panel-title">
-    <h3>
-      Email Template
-    </h3>
-    <hr/>
-  </div>
-</div>  
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Email Template</h1>
+</div>
 
-<div style="padding-top:10px" class="panel-body" >
-<div *ngIf="isShown">
-  <button class="btn btn-primary" (click)="addTemplate()" style="float: right;">Add New</button>
+<!-- Content Row -->
+
+<div class="row">
+
+  <!-- Area Chart -->
+  <div class="col-xl-12 col-lg-12">
+    <div class="card shadow mb-4" *ngIf="isShown">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Email Template List</h6>
+        
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-area">
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="col-lg-12">
+            <button class="btn btn-primary" (click)="addTemplate()" style="float: right;">Add New</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+
   <!-- <img src="../../../../assets/img/loader.png"> -->
   <table class="table">
     <thead class="thead-dark">
@@ -36,30 +52,56 @@
       </tbody>
   </table>
 </div>
-    
-<div *ngIf="!isShown">          
-    <form class="form-horizontal" role="form" [formGroup]="templateForm">
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtTitle">Title</label>      
-      <input type="text" class="form-control" id="txtTitle" placeholder="Title" 
-      formControlName="title" >
-    </div>
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtDescription">Description</label>
-      <input type="text" class="form-control" id="txtDescription" placeholder="Description" 
-      formControlName="description">      
-    </div>
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtDescription">Template</label>  
-      <ckeditor [editor]="Editor" formControlName="htmlContent" data="<p>Hello, world!</p>"></ckeditor>
-     </div>
-    <div class="form-group row"style="margin-bottom: 20px;">  
-      <div class="col-sm-6">        
-    <input type="button" *ngIf="isAddNew" class="btn btn-primary" value="Save" style="margin-right: 10px; width:100px;" (click)="saveTemplate()"/>
-    <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update" style="margin-right: 10px; width:100px;" (click)="updateTemplate()"/>
-    <input type="button" class="btn btn-secondary" value="Cancel" style="width:100px;" (click)="isShown = true"/> 
-      </div>     
-    </div>
-  </form>
 </div>
+</div>
+      </div>
+    </div>
+
+    <div class="card shadow mb-4" *ngIf="!isShown">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Add Email Template</h6>
+        
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-area">
+          <form class="form-horizontal" role="form" [formGroup]="templateForm">
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <label for="txtTitle">Title</label>      
+                <input type="text" class="form-control" id="txtTitle" placeholder="Title" 
+                formControlName="title" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <label for="txtDescription">Description</label>
+              <input type="text" class="form-control" id="txtDescription" placeholder="Description" 
+              formControlName="description">  
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <label for="txtDescription">Template</label>  
+              <ckeditor [editor]="Editor" formControlName="htmlContent" data="<p>Hello, world!</p>"></ckeditor>
+            </div>
+          </div>
+
+          
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <input type="button" *ngIf="isAddNew" class="btn btn-primary" value="Save" style="margin-right: 10px; width:100px;" (click)="saveTemplate()"/>
+            <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update" style="margin-right: 10px; width:100px;" (click)="updateTemplate()"/>
+            <input type="button" class="btn btn-secondary" value="Cancel" style="width:100px;" (click)="isShown = true"/> 
+            </div>
+          </div>
+          </form>
+        </div>
+        </div>
+    </div>
+  </div>
+
 </div>

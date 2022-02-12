@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SideNavComponent } from './shared/side-nav/side-nav.component';
+import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     RecipientGroupComponent,
     UserEmailTemplateComponent,
     HeaderComponent,
-    FooterComponent,    
+    FooterComponent,
+    SideNavComponent,
+    DashboardComponent,    
   ],
   imports: [
     BrowserModule,
