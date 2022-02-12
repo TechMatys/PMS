@@ -1726,19 +1726,23 @@
     ]
   },
   "packageFolders": {
-    "D:\\Users\\ddhiman\\.nuget\\packages\\": {}
+    "C:\\Users\\subha\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.API\\MailCampaign.Api.csproj",
+      "projectUniqueName": "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.API\\MailCampaign.Api.csproj",
       "projectName": "MailCampaign.Api",
-      "projectPath": "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.API\\MailCampaign.Api.csproj",
-      "packagesPath": "D:\\Users\\ddhiman\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.API\\obj\\",
+      "projectPath": "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.API\\MailCampaign.Api.csproj",
+      "packagesPath": "C:\\Users\\subha\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "D:\\Users\\ddhiman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\subha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1752,11 +1756,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.Core\\MailCampaign.Core.csproj": {
-              "projectPath": "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.Core\\MailCampaign.Core.csproj"
+            "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.Core\\MailCampaign.Core.csproj": {
+              "projectPath": "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.Core\\MailCampaign.Core.csproj"
             },
-            "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.Infrastructure\\MailCampaign.Infrastructure.csproj": {
-              "projectPath": "D:\\Users\\ddhiman\\Desktop\\Mail Campaign\\mail-campaign-rest-api\\MailCampaign.Infrastructure\\MailCampaign.Infrastructure.csproj"
+            "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.Infrastructure\\MailCampaign.Infrastructure.csproj": {
+              "projectPath": "D:\\Projects\\PMS\\mail-campaign-rest-api\\MailCampaign.Infrastructure\\MailCampaign.Infrastructure.csproj"
             }
           }
         }
@@ -1786,6 +1790,16 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.10, 3.1.10]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.22, 3.1.22]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1794,7 +1808,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

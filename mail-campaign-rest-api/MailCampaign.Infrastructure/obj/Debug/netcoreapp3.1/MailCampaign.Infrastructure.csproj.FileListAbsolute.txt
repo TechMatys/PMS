@@ -24,3 +24,16 @@ D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Infra
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.csproj.CopyComplete
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.dll
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\bin\Debug\netcoreapp3.1\MailCampaign.Infrastructure.deps.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\bin\Debug\netcoreapp3.1\MailCampaign.Infrastructure.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\bin\Debug\netcoreapp3.1\MailCampaign.Infrastructure.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\bin\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\bin\Debug\netcoreapp3.1\MailCampaign.Core.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.csproj.AssemblyReference.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.AssemblyInfoInputs.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.AssemblyInfo.cs
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.csproj.CopyComplete
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.Infrastructure\obj\Debug\netcoreapp3.1\MailCampaign.Infrastructure.pdb

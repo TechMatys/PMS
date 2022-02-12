@@ -84,3 +84,45 @@ D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.API\o
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.dll
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.pdb
 D:\Users\ddhiman\Desktop\Mail Campaign\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.genruntimeconfig.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.StaticWebAssets.xml
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.exe
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.deps.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.runtimeconfig.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.runtimeconfig.dev.json
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Api.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Dapper.Contrib.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Core.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Infrastructure.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Core.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\bin\Debug\netcoreapp3.1\MailCampaign.Infrastructure.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.csproj.AssemblyReference.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.AssemblyInfoInputs.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.AssemblyInfo.cs
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.csproj.CoreCompileInputs.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\staticwebassets\MailCampaign.Api.StaticWebAssets.Manifest.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.RazorTargetAssemblyInfo.cache
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.csproj.CopyComplete
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.dll
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.pdb
+D:\Projects\PMS\mail-campaign-rest-api\MailCampaign.API\obj\Debug\netcoreapp3.1\MailCampaign.Api.genruntimeconfig.cache
