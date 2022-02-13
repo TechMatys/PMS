@@ -1,94 +1,155 @@
-<div class="panel-heading">
-  <div class="panel-title">
-    <h3>
-      Recipient Group
-    </h3>
-    <hr/>
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Recipient Group</h1>
+</div>
+
+
+<!-- Content Row -->
+
+<div class="row">
+
+  <div class="col-lg-12">
+    <!--List-->
+    <div class="card shadow mb-4" *ngIf="isShown">
+
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+          Recipient Group List
+        </h6>
+      </div>
+
+      <div class="card-body">
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="col-lg-12">
+            <button class="btn btn-primary btn-sm" (click)="addRecipientGroup()" style="float: right;">Add New</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th>
+                    Group Name
+                  </th>
+                  <th>
+                    Created Date
+                  </th>
+                  <th>
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let recipientGroup of recipientGroupList; index as i">
+                  <td>
+                    {{recipientGroup.groupName}}
+                  </td>
+                  <td>
+                    {{recipientGroup.createdDate }}
+                  </td>
+                  <td>
+                    <a href="javascript:void(0)" (click)="editRecipientGroup(recipientGroup.recipientGroupId)"
+                      style="margin-right: 10px;">
+                      <fa-icon [icon]="faEdit"></fa-icon>
+                    </a>
+                    <a href="javascript:void(0)" (click)="deleteRecipientGroup(recipientGroup.recipientGroupId)"
+                      style="margin-right: 10px;">
+                      <fa-icon [icon]="faDelete"></fa-icon>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Form-->
+    <div class="card shadow mb-4" *ngIf="!isShown">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Add Email Template</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <form class="form-horizontal" role="form" [formGroup]="recipientGroupForm">
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <label for="txtTitle">Group Name</label>
+              <input type="text" class="form-control" id="txtGroupName" placeholder="Group Name"
+                formControlName="groupName">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <label for="txtDescription">Description</label>
+              <input type="text" class="form-control" id="txtDescription" placeholder="Description"
+                formControlName="description">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-8">
+              <label for="txtAddress">Email Address</label>
+              <input type="text" class="form-control" id="txtAddress" placeholder="Email Address"
+                formControlName="emailAddress">
+            </div>
+            <div class="form-group col-lg-4">
+              <button class="btn btn-primary btn-sm" (click)="addRecipient()" style="margin-top: 33px;">
+                Add to list</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Email Address</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let recipient of recipientList;">
+                    <td>
+                      {{recipient.emailAddress}}
+                    </td>
+                    <td>
+                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                      </a>
+                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;">
+                        <fa-icon [icon]="faDelete"></fa-icon>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!recipientList.length">
+                    <td colspan="2">
+                      <span>No email address added</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-12">
+              <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
+                style="margin-right: 10px; width:100px;" (click)="saveRecipientGroup()" />
+
+              <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update"
+                style="margin-right: 10px; width:100px;" (click)="updateRecipientGroup()" />
+
+              <input type="button" class="btn btn-secondary" value="Cancel" style="width:100px;"
+                (click)="isShown = true" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>  
-
-<div style="padding-top:10px" class="panel-body" >
-<div *ngIf="isShown">
-  <button class="btn btn-primary" (click)="addRecipientGroup()" style="float: right;">Add New</button>
-  <!-- <img src="../../../../assets/img/loader.png"> -->
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col" >Group Name</th>
-        <th scope="col">Created Date</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let recipientGroup of recipientGroupList; index as i">
-          <td>
-          {{recipientGroup.groupName}}  
-          </td>
-          <td>
-              {{recipientGroup.createdDate }}
-          </td>
-          <td>
-            <a href="javascript:void(0)" (click)="editRecipientGroup(recipientGroup.recipientGroupId)" style="margin-right: 10px;">Edit</a>   
-            <a href="javascript:void(0)" (click)="deleteRecipientGroup(recipientGroup.recipientGroupId)" style="margin-right: 10px;">Delete</a>          
-            <!-- <a href="javascript:void(0)" (click)="viewTemplate(template.templateId)">View</a>        -->
-          </td>
-      </tr>
-      </tbody>
-  </table>
-</div>
-    
-<div *ngIf="!isShown">          
-    <form class="form-horizontal" role="form" [formGroup]="recipientGroupForm">
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtTitle">Group Name</label>      
-      <input type="text" class="form-control" id="txtGroupName" placeholder="Group Name" 
-      formControlName="groupName" >
-    </div>
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtDescription">Description</label>
-      <input type="text" class="form-control" id="txtDescription" placeholder="Description" 
-      formControlName="description">      
-    </div>
-    
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <label for="txtAddress">Email Address</label>
-      <input type="text" class="form-control" id="txtAddress" placeholder="Email Address" formControlName="emailAddress">  
-      <a href="javascript:void(0)" (click)="addRecipient()" style="margin-right: 10px;">Add to list</a>  
-    </div>    
-    <div class="form-group row" style="margin-bottom: 20px;">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Email Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let recipient of recipientList;">
-          <td>
-              {{recipient.emailAddress}}
-          </td>
-          <td>            
-            <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;">Edit</a>   
-            <a href="javascript:void(0)" (click)="deleteRecipient(recipient)" style="margin-right: 10px;">Delete</a>   
-        </td>
-        </tr>
-        <tr *ngIf="!recipientList.length">
-          <td colspan="2">
-                <span>No email address added</span>
-          </td>
-        </tr>
-        </tbody>
-      </table> 
-    </div>
-
-    <div class="form-group row"style="margin-bottom: 20px;">  
-      <div class="col-sm-6">        
-    <input type="button" *ngIf="isAddNew" class="btn btn-primary" value="Save" style="margin-right: 10px; width:100px;" (click)="saveRecipientGroup()"/>
-    <input type="button" *ngIf="!isAddNew" class="btn btn-primary" value="Update" style="margin-right: 10px; width:100px;" (click)="updateRecipientGroup()"/>
-    <input type="button" class="btn btn-secondary" value="Cancel" style="width:100px;" (click)="isShown = true"/> 
-      </div>     
-    </div>
-  </form>
-</div>
 </div>

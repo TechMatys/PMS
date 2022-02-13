@@ -12,5 +12,7 @@ namespace MailCampaign.Core.Models
         public string EmailAddresses { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
+
+        public List<Recipient> RecipientList { get; set; }
     }
 }

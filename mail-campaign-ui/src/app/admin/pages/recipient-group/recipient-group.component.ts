@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { NotificationService  } from 'src/app/core/services/notifications/notification.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 interface RecipientGroup {
   recipientGroupId: any,
@@ -33,12 +34,16 @@ export class RecipientGroupComponent implements OnInit {
 
   recipientGroupList: RecipientGroup[] = [];
   recipientGroupData: RecipientGroup[] = [];
-  recipientList: Recipient[] = [];
+  recipientList: Recipient[] = []; 
+  faEdit = faEdit;
+  faDelete = faTrash;
+  faView = faEye;
 
   isShown: boolean = false;  
   isAddNew: boolean = true;
   recipientGroupId: number = 0;
   controllerName = "recipient-group";
+  IsRecordFetching: boolean = false; 
 
   recipient = {
     recipientId: 0,
