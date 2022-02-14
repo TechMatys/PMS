@@ -101,15 +101,8 @@ export class EmailTemplateComponent implements OnInit {
 
   viewTemplate(id: any) {
     this.http.get(this.controllerName, id).subscribe(res => {
-      const text = res.htmlContent;
-      this.modelService.confirm('Template', text, 'OK', 'No', 'md')
-        .then((confirmed) => {
-          if (confirmed) {
-            this.http.delete(this.controllerName, id).subscribe(res => {
-              this.getTemplate();
-            });
-          }
-        });
+      const text = res.htmlContent;      
+      this.modelService.confirm('Template', text, 'Close', '', 'md');
     });
   }
 

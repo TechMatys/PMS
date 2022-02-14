@@ -17,17 +17,16 @@
       <!-- Card Body -->
       <div class="card-body">
         <div class="row" style="margin-bottom: 10px;">
-          <div class="col-lg-8">
+          <!-- <div class="col-lg-8">
             <button class="btn btn-success" (click)="showToaster()">Show toaster</button>
-          </div>
-          <div class="col-lg-4">
+          </div> -->
+          <div class="col-lg-12">
             <button class="btn btn-primary btn-sm" (click)="addTemplate()" style="float: right;">Add New</button>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
 
-            <!-- <img src="../../../../assets/img/loader.png"> -->
             <table class="table">
               <thead class="thead-dark">
                 <tr>
@@ -54,11 +53,10 @@
                         style="margin-right: 10px;" ngbTooltip="Delete">
                         <fa-icon [icon]="faDelete"></fa-icon>
                       </a>
-                      <a href="javascript:void(0)" (click)="viewTemplate(template.templateId)"
+                      <!-- <a href="javascript:void(0)" (click)="viewTemplate(template.templateId)"
                         style="margin-right: 10px;" ngbTooltip="View">
                         <fa-icon [icon]="faView"></fa-icon>
-                      </a>
-                      <!-- <a href="javascript:void(0)" (click)="viewTemplate(template.templateId)">View</a>        -->
+                      </a> -->
                     </td>
                   </tr>
                 </ng-container>
