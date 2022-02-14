@@ -76,6 +76,7 @@ export class EmailTemplateComponent implements OnInit {
     this.http.create(this.controllerName, data)
       .subscribe({
         next: (res) => {
+          this.notifyService.showSuccess("Template saved successfully.", "Success");
           this.getTemplate();
         },
         error: (e) => console.error(e)
@@ -114,6 +115,7 @@ export class EmailTemplateComponent implements OnInit {
     this.http.update(this.controllerName, this.templateId, data)
       .subscribe({
         next: (res) => {
+          this.notifyService.showSuccess("Template updated successfully.", "Success");
           this.getTemplate();
         },
         error: (e) => console.error(e)
@@ -125,6 +127,7 @@ export class EmailTemplateComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.http.delete(this.controllerName, id).subscribe(res => {
+            this.notifyService.showSuccess("Template deleted successfully.", "Success");
             this.getTemplate();
           });
         }
