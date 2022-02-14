@@ -19,6 +19,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModelComponent } from './shared/model/model.component';
+import { ModelService } from './core/services/modal/model.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     FooterComponent,
     SideNavComponent,
-    DashboardComponent,    
+    DashboardComponent,
+    ModelComponent,    
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CKEditorModule,
     FontAwesomeModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ModelService],
+  bootstrap: [AppComponent],
+  entryComponents: [ ModelComponent ],
 })
 export class AppModule { }
