@@ -118,11 +118,17 @@
                       {{recipient.emailAddress}}
                     </td>
                     <td>
-                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;">
+                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Edit">
                         <fa-icon [icon]="faEdit"></fa-icon>
                       </a>
-                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;">
+                      <a href="javascript:void(0)" (click)="deleteRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Remove">
                         <fa-icon [icon]="faDelete"></fa-icon>
+                      </a>
+                      <a href="javascript:void(0)" (click)="updateRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Update">
+                        <fa-icon [icon]="faSave"></fa-icon>
+                      </a>
+                      <a href="javascript:void(0)" (click)="cancelRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Cancel">
+                        <fa-icon [icon]="faRemove"></fa-icon>
                       </a>
                     </td>
                   </tr>

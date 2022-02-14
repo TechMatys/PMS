@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye, faSave, faRemove } from '@fortawesome/free-solid-svg-icons';
 import { ModelService } from 'src/app/core/services/modal/model.service';
 
 interface RecipientGroup {
@@ -39,6 +39,8 @@ export class RecipientGroupComponent implements OnInit {
   faEdit = faEdit;
   faDelete = faTrash;
   faView = faEye;
+  faSave =faSave;
+  faRemove= faRemove;
 
   isShown: boolean = false;
   isAddNew: boolean = true;
@@ -138,6 +140,14 @@ export class RecipientGroupComponent implements OnInit {
   }
 
   deleteRecipient(recipient: any) {
+
+  }
+
+  updateRecipient(recipient: any) {
+
+  }
+
+  cancelRecipient(recipient: any) {
 
   }
 
