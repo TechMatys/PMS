@@ -27,7 +27,7 @@ namespace MailCampaign.Infrastructure.Repositories
 	                                ,IsActive
 	                                ,CreatedBy
 	                                ,CreatedDate
-                                FROM Recipients";
+                                FROM Recipients where IsDeleted = 0";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {

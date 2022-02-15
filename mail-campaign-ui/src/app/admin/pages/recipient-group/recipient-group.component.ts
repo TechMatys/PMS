@@ -52,10 +52,24 @@ export class RecipientGroupComponent implements OnInit {
     isEdit: false
   }
 
+  keyword = 'emailAddress';
+  recipientData = [
+    {
+      id: 0,
+      emailAddress: 'Select',
+    }
+  ];
+
   constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
     private modelService: ModelService) {
   }
 
+
+  getRecipient() {
+    this.http.getAll("recipient").subscribe(res => {
+      this.recipientData = res;
+    });
+  }
 
   getRecipientGroup() {
     this.isShown = true;
@@ -107,7 +121,9 @@ export class RecipientGroupComponent implements OnInit {
       this.isShown = false;
       this.isAddNew = false;
       this.createRecipientGroupForm(res);
-      this.recipientList = JSON.parse(res.recipientListData);
+      if (res.recipientListData !== null) {
+        this.recipientList = JSON.parse(res.recipientListData);
+      }
     });
   }
 
@@ -156,9 +172,14 @@ export class RecipientGroupComponent implements OnInit {
 
   addRecipient() {
     const data: any = this.recipientGroupForm.get('emailAddress');
+    if (data.value === "" ) {
+      this.notifyService.showWarning("Please enter email address.", "Warning");
+      return;
+    }
+    const emailAddress = data.value.emailAddress;
     this.recipient = {
       recipientId: 0,
-      emailAddress: data.value,
+      emailAddress: emailAddress,
       isEdit: false
     }
     this.recipientList.push(this.recipient);
@@ -168,6 +189,7 @@ export class RecipientGroupComponent implements OnInit {
     this.isShown = !this.isShown;
     this.IsRecordFetching = !this.IsRecordFetching;
     this.getRecipientGroup();
+    this.getRecipient();
   }
 
 }

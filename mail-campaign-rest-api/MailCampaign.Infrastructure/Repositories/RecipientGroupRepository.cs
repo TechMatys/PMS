@@ -101,8 +101,7 @@ namespace MailCampaign.Infrastructure.Repositories
                               Select rc.RecipientId, @RecipientGroupId, 1, -1, GetUtcDate() from @Temp_Recipient tr
                               Inner Join Recipients rc on rc.EmailAddress = tr.EmailAddress
                               Left Join RecipientGroupMapping rgm on rgm.RecipientId = rc.RecipientId and rgm.RecipientGroupId = @RecipientGroupId and rgm.IsDeleted = 0
-                              where IsNull(rgm.RecipientGroupMappingId,0) = 0 
-                              
+                              where IsNull(rgm.RecipientGroupMappingId,0) = 0                               
                               
                               --Update recipients mapping table records(if existing entry)
                               Update rgm set IsActive = 0, IsDeleted = 1, DeletedBy = -1, DeletedDate = GetUtcDate() from RecipientGroupMapping rgm
@@ -160,7 +159,6 @@ namespace MailCampaign.Infrastructure.Repositories
                             Inner Join Recipients rc on rc.EmailAddress = tr.EmailAddress
                             Left Join RecipientGroupMapping rgm on rgm.RecipientId = rc.RecipientId and rgm.RecipientGroupId = @RecipientGroupId and rgm.IsDeleted = 0
                             where IsNull(rgm.RecipientGroupMappingId,0) = 0 
-
 
                             --Update recipients mapping table records(if existing entry)
                             Update rgm set IsActive = 0, IsDeleted = 1, DeletedBy = -1, DeletedDate = GetUtcDate() from RecipientGroupMapping rgm

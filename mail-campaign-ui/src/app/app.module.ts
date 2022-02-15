@@ -22,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModelComponent } from './shared/model/model.component';
 import { ModelService } from './core/services/modal/model.service';
 import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings
     SideNavComponent,
     DashboardComponent,
     ModelComponent,
-    MailSettingsComponent,    
+    MailSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,10 +48,11 @@ import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     CKEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AutocompleteLibModule
   ],
   providers: [ModelService],
   bootstrap: [AppComponent],
-  entryComponents: [ ModelComponent ],
+  entryComponents: [ModelComponent],
 })
 export class AppModule { }
