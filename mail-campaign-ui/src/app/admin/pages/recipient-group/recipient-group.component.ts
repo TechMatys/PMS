@@ -13,7 +13,8 @@ interface RecipientGroup {
 
 interface Recipient {
   recipientId: any,
-  emailAddress: string;
+  emailAddress: string,
+  isEdit: boolean
 }
 
 @Component({
@@ -26,21 +27,18 @@ export class RecipientGroupComponent implements OnInit {
   recipientGroupForm = new FormGroup({
     groupName: new FormControl(''),
     description: new FormControl(''),
-    emailAddress: new FormControl(''),
-    emailAddressList: new FormGroup({
-      recipientId: new FormControl(''),
-      emailAddress: new FormControl(''),
-    })
+    emailAddress: new FormControl('')
   });
 
   recipientGroupList: RecipientGroup[] = [];
   recipientGroupData: RecipientGroup[] = [];
   recipientList: Recipient[] = [];
+
   faEdit = faEdit;
   faDelete = faTrash;
   faView = faEye;
-  faSave =faSave;
-  faRemove= faRemove;
+  faSave = faSave;
+  faRemove = faRemove;
 
   isShown: boolean = false;
   isAddNew: boolean = true;
@@ -50,7 +48,8 @@ export class RecipientGroupComponent implements OnInit {
 
   recipient = {
     recipientId: 0,
-    emailAddress: ''
+    emailAddress: '',
+    isEdit: false
   }
 
   constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
@@ -60,7 +59,9 @@ export class RecipientGroupComponent implements OnInit {
 
   getRecipientGroup() {
     this.isShown = true;
+    this.IsRecordFetching = true;
     this.http.getAll(this.controllerName).subscribe(res => {
+      this.IsRecordFetching = false;
       this.recipientGroupList = res;
     });
   }
@@ -78,15 +79,14 @@ export class RecipientGroupComponent implements OnInit {
   }
 
   saveRecipientGroup() {
-    this.recipientGroupData = this.recipientGroupForm.value;
-
-    const data = Object.assign({}, this.recipientGroupData);
+    const data = this.recipientGroupForm.value;
+    data.recipientList = this.recipientList;
 
     this.http.create(this.controllerName, data)
       .subscribe({
         next: (res) => {
+          this.notifyService.showSuccess("Recipient group saved successfully.", "Success");
           this.getRecipientGroup();
-          // this.notifyService.showSuccess("Adding template", "Success")
         },
         error: (e) => console.error(e)
       });
@@ -107,17 +107,18 @@ export class RecipientGroupComponent implements OnInit {
       this.isShown = false;
       this.isAddNew = false;
       this.createRecipientGroupForm(res);
+      this.recipientList = JSON.parse(res.recipientListData);
     });
   }
 
   updateRecipientGroup() {
-    this.recipientGroupData = this.recipientGroupForm.value;
-
-    const data = Object.assign({}, this.recipientGroupData);
+    const data = this.recipientGroupForm.value;
+    data.recipientList = this.recipientList;
 
     this.http.update(this.controllerName, this.recipientGroupId, data)
       .subscribe({
         next: (res) => {
+          this.notifyService.showSuccess("Recipient group updated successfully.", "Success");
           this.getRecipientGroup();
         },
         error: (e) => console.error(e)
@@ -129,6 +130,7 @@ export class RecipientGroupComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.http.delete(this.controllerName, id).subscribe(res => {
+            this.notifyService.showSuccess("Recipient group deleted successfully.", "Success");
             this.getRecipientGroup();
           });
         }
@@ -136,11 +138,11 @@ export class RecipientGroupComponent implements OnInit {
   }
 
   editRecipient(recipient: any) {
-
+    recipient.isEdit = true;
   }
 
-  deleteRecipient(recipient: any) {
-
+  deleteRecipient(index: number) {
+    this.recipientList.splice(index, 1);
   }
 
   updateRecipient(recipient: any) {
@@ -148,6 +150,7 @@ export class RecipientGroupComponent implements OnInit {
   }
 
   cancelRecipient(recipient: any) {
+    recipient.isEdit = false;
 
   }
 
@@ -155,13 +158,15 @@ export class RecipientGroupComponent implements OnInit {
     const data: any = this.recipientGroupForm.get('emailAddress');
     this.recipient = {
       recipientId: 0,
-      emailAddress: data.value
+      emailAddress: data.value,
+      isEdit: false
     }
     this.recipientList.push(this.recipient);
   }
 
   ngOnInit(): void {
     this.isShown = !this.isShown;
+    this.IsRecordFetching = !this.IsRecordFetching;
     this.getRecipientGroup();
   }
 

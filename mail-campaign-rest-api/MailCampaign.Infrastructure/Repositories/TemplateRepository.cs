@@ -127,7 +127,8 @@ namespace MailCampaign.Infrastructure.Repositories
             try
             {
                 var query = @"UPDATE Templates
-                                SET IsDeleted = 1
+                                SET IsActive = 0
+                                    ,IsDeleted = 1
 	                                ,DeletedBy = -1
 	                                ,DeletedDate = GetUtcDate()
                                 WHERE TemplateId = @TemplateId";

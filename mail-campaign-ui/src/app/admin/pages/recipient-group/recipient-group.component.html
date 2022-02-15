@@ -59,6 +59,21 @@
                     </a>
                   </td>
                 </tr>
+                <tr *ngIf="!recipientGroupList.length && !IsRecordFetching">
+                  <td colspan="3">
+                    <span>
+                      No records found
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="IsRecordFetching">
+                  <td colspan="3">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>
+                      Feching records. Please wait
+                    </span>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -113,23 +128,31 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let recipient of recipientList;">
+                  <tr *ngFor="let recipient of recipientList; let index = index;">
                     <td>
                       {{recipient.emailAddress}}
                     </td>
                     <td>
-                      <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Edit">
-                        <fa-icon [icon]="faEdit"></fa-icon>
-                      </a>
-                      <a href="javascript:void(0)" (click)="deleteRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Remove">
-                        <fa-icon [icon]="faDelete"></fa-icon>
-                      </a>
-                      <a href="javascript:void(0)" (click)="updateRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Update">
-                        <fa-icon [icon]="faSave"></fa-icon>
-                      </a>
-                      <a href="javascript:void(0)" (click)="cancelRecipient(recipient)" style="margin-right: 10px;" ngbTooltip="Cancel">
-                        <fa-icon [icon]="faRemove"></fa-icon>
-                      </a>
+                      <div *ngIf="!recipient.isEdit">
+                        <a href="javascript:void(0)" (click)="editRecipient(recipient)" style="margin-right: 10px;"
+                          ngbTooltip="Edit">
+                          <fa-icon [icon]="faEdit"></fa-icon>
+                        </a>
+                        <a href="javascript:void(0)" (click)="deleteRecipient(index)" style="margin-right: 10px;"
+                          ngbTooltip="Remove">
+                          <fa-icon [icon]="faDelete"></fa-icon>
+                        </a>
+                      </div>
+                      <div *ngIf="recipient.isEdit">
+                        <a href="javascript:void(0)" (click)="updateRecipient(recipient)" style="margin-right: 10px;"
+                          ngbTooltip="Update">
+                          <fa-icon [icon]="faSave"></fa-icon>
+                        </a>
+                        <a href="javascript:void(0)" (click)="cancelRecipient(recipient)" style="margin-right: 10px;"
+                          ngbTooltip="Cancel">
+                          <fa-icon [icon]="faRemove"></fa-icon>
+                        </a>
+                      </div>
                     </td>
                   </tr>
                   <tr *ngIf="!recipientList.length">
