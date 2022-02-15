@@ -21,6 +21,7 @@ import { DashboardComponent } from './admin/pages/dashboard/dashboard.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModelComponent } from './shared/model/model.component';
 import { ModelService } from './core/services/modal/model.service';
+import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ModelService } from './core/services/modal/model.service';
     FooterComponent,
     SideNavComponent,
     DashboardComponent,
-    ModelComponent,    
+    ModelComponent,
+    MailSettingsComponent,    
   ],
   imports: [
     BrowserModule,
