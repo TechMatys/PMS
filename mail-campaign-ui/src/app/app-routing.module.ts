@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { EmailTemplateComponent } from './admin/pages/email-template/email-template.component';
+import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings.component';
 import { RecipientGroupComponent } from './admin/pages/recipient-group/recipient-group.component';
 import { UserEmailTemplateComponent } from './admin/pages/user-email-template/user-email-template.component';
 
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'UserEmailTemplate', component: UserEmailTemplateComponent
+  },
+  {
+    path: 'MailSettings', component: MailSettingsComponent
   },
 ];
 
