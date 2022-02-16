@@ -6,20 +6,117 @@
 <!-- Content Row -->
 
 <div class="row">
+
     <div class="col-lg-12">
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4" *ngIf="isShown">
             <!-- Header -->
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">User Email Template</h6>
+                <h6 class="m-0 font-weight-bold text-primary">User Email Template List</h6>
 
             </div>
             <!-- Body -->
             <div class="card-body">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary btn-sm" (click)="addTemplate()" style="float: right;">Add
+                            New</button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
 
+                        <table class="table table-bordered ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf="!IsRecordFetching">
+                                    <tr *ngFor="let template of templatelist;">
+                                        <td>
+                                            {{template.subject}}
+                                        </td>
+                                        <td>
+                                            {{template.createdDate }}
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0)" (click)="deleteTemplate(template.userEmailTemplateId)"
+                                                style="margin-right: 10px;" ngbTooltip="Delete">
+                                                <fa-icon [icon]="faDelete"></fa-icon>
+                                            </a>
+                                            <a href="javascript:void(0)" (click)="viewTemplate(template.userEmailTemplateId)"
+                                                style="margin-right: 10px;" ngbTooltip="View">
+                                                <fa-icon [icon]="faView"></fa-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <tr *ngIf="!templatelist.length && !IsRecordFetching">
+                                    <td colspan="3">
+                                        <span>
+                                            No records found
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="IsRecordFetching">
+                                    <td colspan="3">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <span>
+                                            Feching records. Please wait
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4" *ngIf="!isShown">
+            <!-- Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Compose</h6>
+
+            </div>
+            <!-- Body -->
+            <div class="card-body">
+                <form class="form-horizontal" role="form" [formGroup]="templateForm">
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="to">To</label>
+                            <input type="text" class="form-control" id="to" placeholder="To"
+                                formControlName="to">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="txtDescription">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Subject"
+                                formControlName="subject">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <label for="txtDescription">Template</label>
+                            <ckeditor [editor]="Editor" formControlName="htmlContent" data=""></ckeditor>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
+                                style="margin-right: 10px; width:100px;" (click)="saveTemplate()" />
+                            <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
+                                (click)="isShown = true" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

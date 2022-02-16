@@ -20,27 +20,104 @@ namespace MailCampaign.Infrastructure.Repositories
             this.configuration = configuration;
         }
 
-        public Task<IEnumerable<UserEmailTemplateModal>> GetAllUserEmailTemplate()
+
+        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllUserEmailTemplate()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = @"SELECT UserEmailTemplateId 
+                                    ,Subject
+	                                ,IsActive
+	                                ,CreatedBy
+	                                ,Convert(nvarchar(10),CreatedDate,110) as CreatedDate
+                                FROM UserEmailTemplates where IsDeleted = 0";
+
+                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    return (await connection.QueryAsync<UserEmailTemplateModal>(query)).ToList();
+                }
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message, exp);
+            }
         }
 
-        public Task<UserEmailTemplateModal> GetUserEmailTemplateById(int id)
+        public async Task<UserEmailTemplateModal> GetUserEmailTemplateById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = @"SELECT Subject
+                                    ,HtmlContent
+                              FROM UserEmailTemplates where UserEmailTemplateId = @UserEmailTemplateId";
+
+                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    return (await connection.QueryAsync<UserEmailTemplateModal>(query, new
+                    {
+                        UserEmailTemplateId = id
+
+                    })).FirstOrDefault();
+                }
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message, exp);
+            }
         }
 
         public Task<bool> Create(UserEmailTemplateModal fields)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var query = @"INSERT INTO UserEmailTemplates(Subject, HtmlContent, IsActive, CreatedBy, CreatedDate) 
+                              VALUES (@Subject, @HtmlContent, 1, -1, GetUtcDate())";
 
-        public Task<bool> Update(int id, UserEmailTemplateModal fields)
-        {
-            throw new NotImplementedException();
+                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    connection.Execute(query, new
+                    {
+                        fields.Subject,
+                        fields.HtmlContent
+                    });
+
+                    return Task.FromResult(true);
+                }
+            }
+            catch (Exception exp)
+            {
+                return Task.FromResult(false);
+            }
         }
 
         public Task<bool> Delete(int id)
+        {
+            try
+            {
+                var query = @"UPDATE UserEmailTemplates
+                                SET IsActive = 0
+                                    ,IsDeleted = 1
+	                                ,DeletedBy = -1
+	                                ,DeletedDate = GetUtcDate()
+                                WHERE UserEmailTemplateId = @UserEmailTemplateId";
+
+                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    connection.Execute(query, new
+                    {
+                        UserEmailTemplateId = id
+                    });
+
+                    return Task.FromResult(true);
+                }
+            }
+            catch (Exception exp)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
+        public Task<bool> Update(int id, UserEmailTemplateModal fields)
         {
             throw new NotImplementedException();
         }

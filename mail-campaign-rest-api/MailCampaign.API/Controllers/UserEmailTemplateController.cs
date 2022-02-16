@@ -21,7 +21,7 @@ namespace MailCampaign.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserEmailTemplateModal>>> GetAllUserEmailTemplate()
-        {
+            {
             var response = await _userEmaiTemplateGroupService.GetAllUserEmailTemplate().ConfigureAwait(false);
 
             if (response == null)
@@ -42,12 +42,6 @@ namespace MailCampaign.Api.Controllers
         public async Task<ActionResult<bool>> Create([FromBody] UserEmailTemplateModal entity)
         {
             return await _userEmaiTemplateGroupService.Create(entity);
-        }
-
-        [HttpPatch("{id}")]
-        public async Task<ActionResult<bool>> Update(int id, [FromBody] UserEmailTemplateModal fields)
-        {
-            return await _userEmaiTemplateGroupService.Update(id, fields);
         }
 
         [HttpDelete("{id}")]
