@@ -8,116 +8,133 @@
 <div class="row">
 
     <div class="col-lg-12">
-        <div class="card shadow mb-4" *ngIf="isShown">
-            <!-- Header -->
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">User Email Template List</h6>
+        <tabset>
+            <tab heading="Compose" id="tab1">
+                <div class="card shadow mb-4">
+                    <!-- Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-horizontal" role="form" [formGroup]="mailForm">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="txtFrom">From : abc@noemail.com</label>
+                                        </div>
+                                    </div>
 
-            </div>
-            <!-- Body -->
-            <div class="card-body">
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-lg-12">
-                        <button class="btn btn-primary btn-sm" (click)="addTemplate()" style="float: right;">Add
-                            New</button>
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="txtDescription">To</label>
+                                            <input type="text" class="form-control" id="txtTo" placeholder="To"
+                                                formControlName="to">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <label for="txtDescription">Subject</label>
+                                            <input type="text" class="form-control" id="txtSubject"
+                                                placeholder="Subject" formControlName="subject">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <input type="button" style="float: right;" class="btn btn-sm btn-success"
+                                                value="Select Template" (click)="openModal(template)" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <ckeditor [editor]="Editor" formControlName="htmlContent" data="">
+                                            </ckeditor>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            <input type="button" class="btn btn-primary" value="Send"
+                                                style="margin-right: 10px; width:100px;" (click)="sendMail()" />
+
+                                            <input type="button" class="btn btn-primary" value="Send Later"
+                                                style="margin-right: 10px; width:100px;" />
+
+                                            <input type="button" class="btn btn-primary" value="Preview"
+                                                style="margin-right: 10px; width:100px;" />
+
+                                            <input type="button" class="btn btn-primary" value="Draft"
+                                                style="margin-right: 10px; width:100px;" />
+
+                                            <input type="button" class="btn btn-outline-primary" value="Discard"
+                                                style="margin-right: 10px; width:100px;" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <table class="table table-bordered ">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Created Date</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <ng-container *ngIf="!IsRecordFetching">
-                                    <tr *ngFor="let template of templatelist;">
-                                        <td>
-                                            {{template.subject}}
-                                        </td>
-                                        <td>
-                                            {{template.createdDate }}
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" (click)="deleteTemplate(template.userEmailTemplateId)"
-                                                style="margin-right: 10px;" ngbTooltip="Delete">
-                                                <fa-icon [icon]="faDelete"></fa-icon>
-                                            </a>
-                                            <a href="javascript:void(0)" (click)="viewTemplate(template.userEmailTemplateId)"
-                                                style="margin-right: 10px;" ngbTooltip="View">
-                                                <fa-icon [icon]="faView"></fa-icon>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                                <tr *ngIf="!templatelist.length && !IsRecordFetching">
-                                    <td colspan="3">
-                                        <span>
-                                            No records found
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr *ngIf="IsRecordFetching">
-                                    <td colspan="3">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <span>
-                                            Feching records. Please wait
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            </tab>
+            <tab heading="Sent" (click)="getSentMail()">
+                <div class="card shadow mb-4">
+                    <!-- Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <accordion>
+                                    <accordion-group *ngFor="let mail of sentMaillist" [heading]="mail.subject">
+                                        {{ mail.htmlContent }}
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="card shadow mb-4" *ngIf="!isShown">
-            <!-- Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Compose Mail</h6>
-
-            </div>
-            <!-- Body -->
-            <div class="card-body">
-                <form class="form-horizontal" role="form" [formGroup]="templateForm">
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <label for="to">To</label>
-                            <input type="text" class="form-control" id="to" placeholder="To"
-                                formControlName="to">
+            </tab>
+            <tab heading="Draft" (click)="getDraftMail()">
+                <div class="card shadow mb-4">
+                    <!-- Body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- <accordion>
+                                    <accordion-group *ngFor="let mail of draftMaillist" [heading]="mail.subject">
+                                      {{ mail.htmlContent }}
+                                    </accordion-group>
+                                  </accordion> -->
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <label for="txtDescription">Subject</label>
-                            <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                formControlName="subject">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <label for="txtDescription">Template</label>
-                            <ckeditor [editor]="Editor" formControlName="htmlContent" data=""></ckeditor>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <input type="button" *ngIf="isAddNew" class="btn btn-success" value="Save"
-                                style="margin-right: 10px; width:100px;" (click)="saveTemplate()" />
-                            <input type="button" class="btn btn-outline-primary" value="Cancel" style="width:100px;"
-                                (click)="isShown = true" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
+            </tab>
+        </tabset>
     </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Template</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <select class="form-group" name="template" #templateSelect (change)='viewTemplate(templateSelect.value)'>
+                        <option value="0">-- Select Template --</option>
+                        <option *ngFor="let template of templatesList" [value]="template.templateId">
+                            {{template.title}}</option>
+                    </select>
+
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div [innerHTML]="templateContent"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="selectTemplate(templateContent)">Select</button>
+            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Cancel</button>
+        </div>
+    </ng-template>
 </div>

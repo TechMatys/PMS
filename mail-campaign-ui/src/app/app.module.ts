@@ -23,6 +23,9 @@ import { ModelComponent } from './shared/model/model.component';
 import { ModelService } from './core/services/modal/model.service';
 import { MailSettingsComponent } from './admin/pages/mail-settings/mail-settings.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,12 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     ToastrModule.forRoot(),
     CKEditorModule,
     FontAwesomeModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    TabsModule.forRoot(),
+    AccordionModule,
+    ModalModule,
   ],
-  providers: [ModelService],
+  providers: [ModelService, BsModalService],
   bootstrap: [AppComponent],
   entryComponents: [ModelComponent],
 })

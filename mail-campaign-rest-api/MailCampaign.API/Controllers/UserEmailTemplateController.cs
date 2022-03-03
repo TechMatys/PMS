@@ -19,35 +19,39 @@ namespace MailCampaign.Api.Controllers
             _userEmaiTemplateGroupService = userEmaiTemplateGroupService ?? throw new ArgumentNullException(nameof(userEmaiTemplateGroupService));
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserEmailTemplateModal>>> GetAllUserEmailTemplate()
-            {
-            var response = await _userEmaiTemplateGroupService.GetAllUserEmailTemplate().ConfigureAwait(false);
-
-            if (response == null)
-            {
-                return NoContent();
-            }
-
-            return Ok(response);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserEmailTemplateModal>> GetUserEmailTemplateById(int id)
+        [HttpPost("send-mail")]
+        public async Task<ActionResult<bool>> SendMail([FromBody] UserEmailTemplateModal entity)
         {
-            return await _userEmaiTemplateGroupService.GetUserEmailTemplateById(id).ConfigureAwait(false);
+            entity.StatusId = 1;
+            return Ok(await _userEmaiTemplateGroupService.SendMail(entity));
         }
 
-        [HttpPost]
-        public async Task<ActionResult<bool>> Create([FromBody] UserEmailTemplateModal entity)
+        [HttpPost("draft-mail")]
+        public async Task<ActionResult<bool>> DraftMail([FromBody] UserEmailTemplateModal entity)
         {
-            return await _userEmaiTemplateGroupService.Create(entity);
+            entity.StatusId = 2;
+            return Ok(await _userEmaiTemplateGroupService.SendMail(entity));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        [HttpPost("send-later")]
+        public async Task<ActionResult<bool>> SendLaterMail([FromBody] UserEmailTemplateModal entity)
         {
-            return await _userEmaiTemplateGroupService.Delete(id);
+            entity.StatusId = 3;
+            return Ok(await _userEmaiTemplateGroupService.SendMail(entity));
+
         }
+        [HttpGet("sent-mail")]
+        public async Task<ActionResult<IEnumerable<UserEmailTemplateModal>>> GetAllSentMail()
+        {
+            return Ok(await _userEmaiTemplateGroupService.GetAllSentMail());
+        }
+
+        [HttpGet("draft-mail")]
+        public async Task<ActionResult<IEnumerable<UserEmailTemplateModal>>> GetAllDraftMail()
+        {
+            return Ok(await _userEmaiTemplateGroupService.GetAllDraftMail());
+        }
+
+
     }
 }

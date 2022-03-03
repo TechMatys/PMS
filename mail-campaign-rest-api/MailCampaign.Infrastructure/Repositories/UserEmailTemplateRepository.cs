@@ -20,58 +20,12 @@ namespace MailCampaign.Infrastructure.Repositories
             this.configuration = configuration;
         }
 
-
-        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllUserEmailTemplate()
+        public Task<bool> SendMail(UserEmailTemplateModal fields)
         {
             try
             {
-                var query = @"SELECT UserEmailTemplateId 
-                                    ,Subject
-	                                ,IsActive
-	                                ,CreatedBy
-	                                ,Convert(nvarchar(10),CreatedDate,110) as CreatedDate
-                                FROM UserEmailTemplates where IsDeleted = 0";
-
-                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
-                {
-                    return (await connection.QueryAsync<UserEmailTemplateModal>(query)).ToList();
-                }
-            }
-            catch (Exception exp)
-            {
-                throw new Exception(exp.Message, exp);
-            }
-        }
-
-        public async Task<UserEmailTemplateModal> GetUserEmailTemplateById(int id)
-        {
-            try
-            {
-                var query = @"SELECT Subject
-                                    ,HtmlContent
-                              FROM UserEmailTemplates where UserEmailTemplateId = @UserEmailTemplateId";
-
-                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
-                {
-                    return (await connection.QueryAsync<UserEmailTemplateModal>(query, new
-                    {
-                        UserEmailTemplateId = id
-
-                    })).FirstOrDefault();
-                }
-            }
-            catch (Exception exp)
-            {
-                throw new Exception(exp.Message, exp);
-            }
-        }
-
-        public Task<bool> Create(UserEmailTemplateModal fields)
-        {
-            try
-            {
-                var query = @"INSERT INTO UserEmailTemplates(Subject, HtmlContent, IsActive, CreatedBy, CreatedDate) 
-                              VALUES (@Subject, @HtmlContent, 1, -1, GetUtcDate())";
+                var query = @"INSERT INTO UserEmailTemplates(Subject, HtmlContent, StatusId, IsActive, CreatedBy, CreatedDate) 
+                              VALUES (@Subject, @HtmlContent, 1, 1, -1, GetUtcDate())";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
@@ -90,36 +44,46 @@ namespace MailCampaign.Infrastructure.Repositories
             }
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllSentMail()
         {
             try
             {
-                var query = @"UPDATE UserEmailTemplates
-                                SET IsActive = 0
-                                    ,IsDeleted = 1
-	                                ,DeletedBy = -1
-	                                ,DeletedDate = GetUtcDate()
-                                WHERE UserEmailTemplateId = @UserEmailTemplateId";
+                var query = @"SELECT UserEmailTemplateId
+                                    ,Subject
+                                    ,HtmlContent    
+	                                ,Convert(varchar(10), CreatedDate, 110) as CreatedDate
+                                FROM UserEmailTemplates where IsDeleted = 0 and StatusId = 1";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
-                    connection.Execute(query, new
-                    {
-                        UserEmailTemplateId = id
-                    });
-
-                    return Task.FromResult(true);
+                    return (await connection.QueryAsync<UserEmailTemplateModal>(query)).ToList();
                 }
             }
             catch (Exception exp)
             {
-                return Task.FromResult(false);
+                throw new Exception(exp.Message, exp);
             }
         }
 
-        public Task<bool> Update(int id, UserEmailTemplateModal fields)
+        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllDraftMail()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = @"SELECT UserEmailTemplateId
+                                    ,Subject
+                                    ,HtmlContent    
+	                                ,Convert(varchar(10), CreatedDate, 110) as CreatedDate
+                                FROM UserEmailTemplates where IsDeleted = 0 and StatusId = 2";
+
+                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    return (await connection.QueryAsync<UserEmailTemplateModal>(query)).ToList();
+                }
+            }
+            catch (Exception exp)
+            {
+                throw new Exception(exp.Message, exp);
+            }
         }
     }
 }

@@ -22,14 +22,7 @@ namespace MailCampaign.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipientGroupModal>>> GetAllRecipientGroup()
         {
-            var response = await _recipientGroupService.GetAllRecipientGroup();
-
-            if (response == null)
-            {
-                return NoContent();
-            }
-
-            return Ok(response);
+            return Ok(await _recipientGroupService.GetAllRecipientGroup());
         }
 
         [HttpGet("{id}")]

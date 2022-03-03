@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HttpService } from 'src/app/core/services/https/http.service';
 import { NotificationService } from 'src/app/core/services/notifications/notification.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
-import { ModelService } from 'src/app/core/services/modal/model.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
-interface UserEmailTemplate {
-  userEmailTemplateId: any,
-  subject: string;
-  createdDate: string;
+interface SentMailTemplate {
+  subject: string,
+  sentDate: Date;
+  to: string;
+  htmlContent: string;
+}
+
+interface DraftMailTemplate {
+  subject: string,
+  sentDate: Date;
+  to: string;
+  htmlContent: string;
 }
 
 @Component({
@@ -18,101 +25,79 @@ interface UserEmailTemplate {
   styleUrls: ['./user-email-template.component.css']
 })
 export class UserEmailTemplateComponent implements OnInit {
-  templateForm = new FormGroup({
+  mailForm = new FormGroup({
     to: new FormControl(''),
+    from: new FormControl(''),
     subject: new FormControl(''),
-    htmlContent: new FormControl('')
+    htmlContent: new FormControl(''),
   });
 
-  templatelist: UserEmailTemplate[] = [];
-  templateData: UserEmailTemplate[] = [];
+  sentMaillist: SentMailTemplate[] = [];
+  draftMaillist: DraftMailTemplate[] = [];
   public Editor = ClassicEditor;
-  faEdit = faEdit;
-  faDelete = faTrash;
-  faView = faEye;
-
-  isShown: boolean = false;
-  isAddNew: boolean = true;
-  IsRecordFetching: boolean = false;
   controllerName = "user-email-template";
+  templatesList = [{
+    templateId: 0, title: '-- Select Template --'
+  }];
+  templateContent: string = "";
+  modalRef: any;
 
   constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
-    private modelService: ModelService) {
+    private modalService: BsModalService) {
+    this.modalRef = BsModalRef;
   }
 
-  getTemplate() {
-    this.isShown = true;
-    this.IsRecordFetching = true;
-    this.http.getAll(this.controllerName).subscribe(res => {
-      this.templatelist = res;
-      this.IsRecordFetching = false;
-    });
-  }
-
-  showToaster() {
-      this.notifyService.showSuccess("Adding template", "Success")
-    this.modelService.confirm('Please confirm..', 'Do you really want to ... ?')
-      .then((confirmed) => console.log('User confirmed:', confirmed))
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-  }
-
-  addTemplate() {
-    this.isShown = false;
-    this.isAddNew = true;
-    const data = {
-      to: '',
-      subject: '',
-      htmlContent: ''
-    }
-    this.createTemplateForm(data);
-  }
-
-  saveTemplate() {
-    this.templateData = this.templateForm.value;
-
-    const data = Object.assign({}, this.templateData);
-
-    this.http.create(this.controllerName, data)
+  sendMail() {
+    this.http.create(this.controllerName + "/send-mail", this.mailForm.value)
       .subscribe({
         next: (res) => {
-          this.notifyService.showSuccess("Template saved successfully.", "Success");
-          this.getTemplate();
+          this.notifyService.showSuccess("Mail sent successfully.", "Success");
         },
         error: (e) => console.error(e)
       });
   }
 
-  createTemplateForm(data: any) {
-    this.templateForm = this.fB.group({
-      to: [data.to],
-      subject: [data.subject],
-      htmlContent: [data.htmlContent]
+  getSentMail() {
+    this.http.getAll(this.controllerName + "/sent-mail").subscribe(res => {
+      this.sentMaillist = res;
     });
+  }
+
+  getDraftMail() {
+    this.http.getAll(this.controllerName + "/draft-mail").subscribe(res => {
+      this.draftMaillist = res;
+    });
+  }
+
+
+  openModal(template: TemplateRef<any>) {
+    this.templateContent = "";
+    this.http.getAll("template").subscribe(res => {
+      this.templatesList = res;
+    });
+
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   viewTemplate(id: any) {
-    this.http.get(this.controllerName, id).subscribe(res => {
-      const text = res.htmlContent;      
-      this.modelService.confirm('Template Preview', text, 'Close', '', 'lg');
-    });
+    if (id > 0) {
+      this.http.get("template", id).subscribe(res => {
+        this.templateContent = res.htmlContent;
+      });
+    }
+    else {
+      this.templateContent = "";
+    }
   }
 
-  deleteTemplate(id: any) {
-    this.modelService.confirm('Confirmation', 'Are you sure you want to delete this template?', 'Yes', 'No', 'md')
-      .then((confirmed) => {
-        if (confirmed) {
-          this.http.delete(this.controllerName, id).subscribe(res => {
-            this.notifyService.showSuccess("Template deleted successfully.", "Success");
-            this.getTemplate();
-          });
-        }
-      });
+  selectTemplate(content: string) {
+    this.mailForm.controls['htmlContent'].setValue(content);
+    this.modalRef.hide();
   }
 
   ngOnInit(): void {
-    this.isShown = !this.isShown;
-    this.IsRecordFetching = !this.IsRecordFetching;
-    this.getTemplate();
+    this.getSentMail();
+    this.getDraftMail()
   }
 
 }
