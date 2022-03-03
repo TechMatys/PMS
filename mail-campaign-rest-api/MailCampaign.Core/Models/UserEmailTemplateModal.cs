@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace MailCampaign.Core.Models
 {
     public class UserEmailTemplateModal
@@ -14,5 +11,6 @@ namespace MailCampaign.Core.Models
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
         public int StatusId { get; set; }
+        public string ScheduleDate { get; set; }
     }
 }

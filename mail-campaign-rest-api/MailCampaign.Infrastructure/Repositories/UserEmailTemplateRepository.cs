@@ -24,15 +24,17 @@ namespace MailCampaign.Infrastructure.Repositories
         {
             try
             {
-                var query = @"INSERT INTO UserEmailTemplates(Subject, HtmlContent, StatusId, IsActive, CreatedBy, CreatedDate) 
-                              VALUES (@Subject, @HtmlContent, 1, 1, -1, GetUtcDate())";
+                var query = @"INSERT INTO UserEmailTemplates(Subject, HtmlContent, ScheduleDate, StatusId, IsActive, CreatedBy, CreatedDate) 
+                              VALUES (@Subject, @HtmlContent, @ScheduleDate, @StatusId, 1, -1, GetUtcDate())";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
                     connection.Execute(query, new
                     {
                         fields.Subject,
-                        fields.HtmlContent
+                        fields.HtmlContent,
+                        fields.StatusId,
+                        ScheduleDate = fields.StatusId == 2 ? fields.ScheduleDate : null
                     });
 
                     return Task.FromResult(true);

@@ -4,6 +4,7 @@ import { NotificationService } from 'src/app/core/services/notifications/notific
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface SentMailTemplate {
   subject: string,
@@ -30,6 +31,7 @@ export class UserEmailTemplateComponent implements OnInit {
     from: new FormControl(''),
     subject: new FormControl(''),
     htmlContent: new FormControl(''),
+    scheduleDate: new FormControl('')
   });
 
   sentMaillist: SentMailTemplate[] = [];
@@ -41,17 +43,49 @@ export class UserEmailTemplateComponent implements OnInit {
   }];
   templateContent: string = "";
   modalRef: any;
+  faCalendar = faCalendarAlt;
+  today: Date;
 
   constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
     private modalService: BsModalService) {
     this.modalRef = BsModalRef;
+    this.today = new Date();
   }
 
   sendMail() {
-    this.http.create(this.controllerName + "/send-mail", this.mailForm.value)
+    this.callSendMailAPI(1);
+  }
+
+  draftMail() {
+    this.callSendMailAPI(2);
+  }
+
+  scheduleLaterMail(template: TemplateRef<any>) {    
+    this.modalRef = this.modalService.show(template);
+  }
+
+  sendLaterMail() {
+   this.callSendMailAPI(3);
+  }
+
+  callSendMailAPI(statusId: number) {
+    var message = "", apiName = "";
+    if (statusId === 2) {
+      message = "Mail draft successfully."
+      apiName = "/draft-mail";
+    }
+    else if (statusId === 3) {
+      message = "Mail scheduled for later successfully."
+      apiName = "/send-later";
+    }
+    else {
+      message = "Mail sent successfully."
+      apiName = "/send-mail";
+    }
+    this.http.create(this.controllerName + apiName, this.mailForm.value)
       .subscribe({
         next: (res) => {
-          this.notifyService.showSuccess("Mail sent successfully.", "Success");
+          this.notifyService.showSuccess(message, "Success");
         },
         error: (e) => console.error(e)
       });
@@ -69,6 +103,13 @@ export class UserEmailTemplateComponent implements OnInit {
     });
   }
 
+  previewMailTemplate() {
+    
+  }
+
+  resetMail() {
+    
+  }
 
   openModal(template: TemplateRef<any>) {
     this.templateContent = "";

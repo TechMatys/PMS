@@ -26,6 +26,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     AccordionModule,
     ModalModule,
+    BsDatepickerModule,
   ],
   providers: [ModelService, BsModalService],
   bootstrap: [AppComponent],
