@@ -16,29 +16,20 @@ namespace MailCampaign.Core.Services
             _userEmailTemplateRepository = userEmailTemplateRepository ?? throw new ArgumentNullException(nameof(userEmailTemplateRepository));
         }
 
-        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllUserEmailTemplate()
+        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllSentMail()
         {
-            return await _userEmailTemplateRepository.GetAllUserEmailTemplate();
+            return await _userEmailTemplateRepository.GetAllSentMail();
         }
 
-        public async Task<UserEmailTemplateModal> GetUserEmailTemplateById(int id)
+        public async Task<IEnumerable<UserEmailTemplateModal>> GetAllDraftMail()
         {
-            return await _userEmailTemplateRepository.GetUserEmailTemplateById(id);
+            return await _userEmailTemplateRepository.GetAllDraftMail();
         }
 
-        public async Task<bool> Create(UserEmailTemplateModal fields)
+        public async Task<bool> SendMail(UserEmailTemplateModal fields)
         {
-            return await _userEmailTemplateRepository.Create(fields);
+            return await _userEmailTemplateRepository.SendMail(fields);
         }
 
-        public async Task<bool> Update(int id, UserEmailTemplateModal fields)
-        {
-            return await _userEmailTemplateRepository.Update(id, fields);
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            return await _userEmailTemplateRepository.Delete(id);
-        }
     }
 }

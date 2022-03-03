@@ -13,5 +13,6 @@ namespace MailCampaign.Core.Models
         public int ManagedBy { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
+        public int StatusId { get; set; }
     }
 }

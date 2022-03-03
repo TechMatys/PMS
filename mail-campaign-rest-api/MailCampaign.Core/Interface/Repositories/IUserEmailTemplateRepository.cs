@@ -6,10 +6,8 @@ namespace MailCampaign.Core.Interface.Repositories
 {
     public interface IUserEmailTemplateRepository
     {
-        Task<IEnumerable<UserEmailTemplateModal>> GetAllUserEmailTemplate();
-        Task<UserEmailTemplateModal> GetUserEmailTemplateById(int id);
-        Task<bool> Create(UserEmailTemplateModal fields);
-        Task<bool> Update(int id, UserEmailTemplateModal fields);
-        Task<bool> Delete(int id);
+        Task<IEnumerable<UserEmailTemplateModal>> GetAllSentMail();
+        Task<IEnumerable<UserEmailTemplateModal>> GetAllDraftMail();
+        Task<bool> SendMail(UserEmailTemplateModal fields);
     }
 }
