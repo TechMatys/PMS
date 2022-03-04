@@ -9,7 +9,8 @@ namespace MailCampaign.Core.Models
         public bool IsActive { get; set; }
         public int ManagedBy { get; set; }
         public string CreatedBy { get; set; }
-        public string CreatedDate { get; set; }
+        public string SentDate { get; set; }
+        public string DraftDate { get; set; }
         public int StatusId { get; set; }
         public string ScheduleDate { get; set; }
     }

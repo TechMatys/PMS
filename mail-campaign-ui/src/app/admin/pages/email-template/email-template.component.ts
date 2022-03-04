@@ -50,13 +50,6 @@ export class EmailTemplateComponent implements OnInit {
     });
   }
 
-  showToaster() {
-      this.notifyService.showSuccess("Adding template", "Success")
-    this.modelService.confirm('Please confirm..', 'Do you really want to ... ?')
-      .then((confirmed) => console.log('User confirmed:', confirmed))
-      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-  }
-
   addTemplate() {
     this.isShown = false;
     this.isAddNew = true;
@@ -102,7 +95,7 @@ export class EmailTemplateComponent implements OnInit {
 
   viewTemplate(id: any) {
     this.http.get(this.controllerName, id).subscribe(res => {
-      const text = res.htmlContent;      
+      const text = res.htmlContent;
       this.modelService.confirm('Template', text, 'Close', '', 'lg');
     });
   }

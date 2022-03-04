@@ -5,17 +5,16 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { ModelService } from 'src/app/core/services/modal/model.service';
 
-interface SentMailTemplate {
-  subject: string,
-  sentDate: Date;
-  to: string;
-  htmlContent: string;
+interface MailTemplate {
+  sentDate: string;
+  draftDate: string;
+  mailDetails: MailTemplateList[];
 }
 
-interface DraftMailTemplate {
+interface MailTemplateList {
   subject: string,
-  sentDate: Date;
   to: string;
   htmlContent: string;
 }
@@ -34,20 +33,21 @@ export class UserEmailTemplateComponent implements OnInit {
     scheduleDate: new FormControl('')
   });
 
-  sentMaillist: SentMailTemplate[] = [];
-  draftMaillist: DraftMailTemplate[] = [];
+  sentMaillist: MailTemplate[] = [];
+  draftMaillist: MailTemplate[] = [];
   public Editor = ClassicEditor;
   controllerName = "user-email-template";
   templatesList = [{
     templateId: 0, title: '-- Select Template --'
   }];
   templateContent: string = "";
+  templatePreviewContent: string = "";
   modalRef: any;
   faCalendar = faCalendarAlt;
   today: Date;
 
   constructor(private http: HttpService, private fB: FormBuilder, private notifyService: NotificationService,
-    private modalService: BsModalService) {
+    private modalService: BsModalService, private popUpService: ModelService) {
     this.modalRef = BsModalRef;
     this.today = new Date();
   }
@@ -57,15 +57,20 @@ export class UserEmailTemplateComponent implements OnInit {
   }
 
   draftMail() {
-    this.callSendMailAPI(2);
+    this.popUpService.confirm('Confirmation', 'Are you sure you want to draft this mail?', 'Yes', 'No', 'md')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.callSendMailAPI(2);
+        }
+      });
   }
 
-  scheduleLaterMail(template: TemplateRef<any>) {    
+  scheduleLaterMail(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
   sendLaterMail() {
-   this.callSendMailAPI(3);
+    this.callSendMailAPI(3);
   }
 
   callSendMailAPI(statusId: number) {
@@ -92,23 +97,58 @@ export class UserEmailTemplateComponent implements OnInit {
   }
 
   getSentMail() {
+    var mailDetails : any[] = [];
     this.http.getAll(this.controllerName + "/sent-mail").subscribe(res => {
-      this.sentMaillist = res;
+      res.forEach((item, index) => {       
+        mailDetails.push({
+          subject: item.subject,
+          to: 'Test@noemail.com',
+          htmlContent: item.htmlContent
+        });
+
+        if (index === (res.length - 1) || item.sentDate != res[index + 1].sentDate) {
+          this.sentMaillist.push(
+            {
+              sentDate: item.sentDate,
+              draftDate: '',
+              mailDetails: mailDetails
+            }); 
+            mailDetails = [];
+        }
+      });
     });
   }
 
   getDraftMail() {
+    var mailDetails : any[] = [];
     this.http.getAll(this.controllerName + "/draft-mail").subscribe(res => {
-      this.draftMaillist = res;
+      res.forEach((item, index) => {       
+        mailDetails.push({
+          subject: item.subject,
+          to: 'Test@noemail.com',
+          htmlContent: item.htmlContent
+        });
+
+        if (index === (res.length - 1) || item.draftDate != res[index + 1].draftDate) {
+          this.draftMaillist.push(
+            {
+              draftDate: item.draftDate,
+              sentDate: '',
+              mailDetails: mailDetails
+            }); 
+            mailDetails = [];
+        }
+      });
     });
   }
 
-  previewMailTemplate() {
-    
+  previewMailTemplate(template: TemplateRef<any>, data: any) {
+    this.templatePreviewContent = data.htmlContent;
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   resetMail() {
-    
+
   }
 
   openModal(template: TemplateRef<any>) {

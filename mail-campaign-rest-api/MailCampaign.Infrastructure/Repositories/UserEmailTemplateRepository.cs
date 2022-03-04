@@ -53,8 +53,8 @@ namespace MailCampaign.Infrastructure.Repositories
                 var query = @"SELECT UserEmailTemplateId
                                     ,Subject
                                     ,HtmlContent    
-	                                ,Convert(varchar(10), CreatedDate, 110) as CreatedDate
-                                FROM UserEmailTemplates where IsDeleted = 0 and StatusId = 1";
+	                                ,Convert(varchar(10), CreatedDate, 110) as SentDate
+                                FROM UserEmailTemplates where IsDeleted = 0 and StatusId = 1 order by CreatedDate desc";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
@@ -74,7 +74,7 @@ namespace MailCampaign.Infrastructure.Repositories
                 var query = @"SELECT UserEmailTemplateId
                                     ,Subject
                                     ,HtmlContent    
-	                                ,Convert(varchar(10), CreatedDate, 110) as CreatedDate
+	                                ,Convert(varchar(10), CreatedDate, 110) as DraftDate
                                 FROM UserEmailTemplates where IsDeleted = 0 and StatusId = 2";
 
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))

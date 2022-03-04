@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">User Email Template</h1>
+    <h1 class="h3 mb-0 text-gray-800">User Campaign</h1>
 </div>
 
 <!-- Content Row -->
@@ -53,6 +53,7 @@
 
                                     <div class="row">
                                         <div class="form-group col-lg-4">
+                                            <label for="txtDescription">Scheduled Date</label>
                                             <input type="text" placeholder="DD/MM/YYYY" class="form-control"
                                                 bsDatepicker [maxDate]="today" formControlName="scheduleDate"
                                                 #dob="bsDatepicker"
@@ -79,8 +80,7 @@
 
 
                                             <input type="button" class="btn btn-primary" value="Preview"
-                                                style="margin-right: 10px; width:100px;"
-                                                (click)="previewMailTemplate()" />
+                                                style="margin-right: 10px; width:100px;" (click)="previewMailTemplate(previewTemplate, mailForm.value)" />
 
                                             <input type="button" class="btn btn-primary" value="Draft"
                                                 style="margin-right: 10px; width:100px;" (click)="draftMail()" />
@@ -99,11 +99,12 @@
                 <div class="card shadow mb-4">
                     <!-- Body -->
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row" *ngFor="let mail of sentMaillist;">
                             <div class="col-lg-12">
-                                <accordion [isAnimated]="true">
-                                    <accordion-group *ngFor="let mail of sentMaillist" [heading]="mail.subject">
-                                        <div [innerHTML]="mail.htmlContent"></div>
+                                <label>{{mail.sentDate}}</label>
+                                <accordion [isAnimated]="true" *ngFor="let item of mail.mailDetails;">
+                                    <accordion-group [heading]="item.subject">
+                                        <div [innerHTML]="item.htmlContent"></div>
                                     </accordion-group>
                                 </accordion>
                             </div>
@@ -115,11 +116,12 @@
                 <div class="card shadow mb-4">
                     <!-- Body -->
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row" *ngFor="let mail of draftMaillist;">
                             <div class="col-lg-12">
-                                <accordion [isAnimated]="true">
-                                    <accordion-group *ngFor="let mail of draftMaillist" [heading]="mail.subject">
-                                        <div [innerHTML]="mail.htmlContent"></div>
+                                <label>{{mail.draftDate}}</label>
+                                <accordion [isAnimated]="true" *ngFor="let item of mail.mailDetails;">
+                                    <accordion-group [heading]="item.subject">
+                                        <div [innerHTML]="item.htmlContent"></div>
                                     </accordion-group>
                                 </accordion>
                             </div>
@@ -159,23 +161,19 @@
         </div>
     </ng-template>
 
-    <ng-template #sendLatertemplate>
+    <ng-template #previewTemplate>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">Schedule Mail</h4>
+            <h4 class="modal-title pull-left">Preview Template</h4>
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="input-group">
-
-                    </div>
+                <div class="col-lg-12">                    
+                    <div [innerHTML]="templatePreviewContent"></div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="selectTemplate(templateContent)">Select</button>
-            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Cancel</button>
+            <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Close</button>
         </div>
     </ng-template>
-
 </div>
