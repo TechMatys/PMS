@@ -125,3 +125,8 @@ mail-campaign-rest-api/MailCampaign.Infrastructure/obj/MailCampaign.Infrastructu
 mail-campaign-rest-api/MailCampaign.Infrastructure/obj/project.assets.json
 mail-campaign-rest-api/MailCampaign.Infrastructure/obj/project.nuget.cache
 mail-campaign-ui/package-lock.json
+*.json
+*.dll
+*.pdb
+*.cache
+*.txt
